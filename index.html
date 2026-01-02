@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>The Hollywood Reporter – Cinema Magazine</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Polices premium -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: "Inter", sans-serif;
+      background: #f3f3f3;
+      color: #222;
+    }
+
+    /* ===================== NAV BAR ===================== */
+    nav {
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: #0d0d0d;
+      padding: 18px 45px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 20;
+      border-bottom: 2px solid #c31717;
+    }
+
+    nav .logo {
+      color: #ffffff;
+      font-size: 2rem;
+      font-weight: 700;
+      font-family: "Playfair Display", serif;
+      letter-spacing: 1px;
+    }
+
+    nav ul { list-style: none; display: flex; gap: 35px; }
+
+    nav ul li a {
+      color: #eeeeee;
+      text-decoration: none;
+      font-size: 1rem;
+      padding-bottom: 4px;
+      border-bottom: 2px solid transparent;
+      transition: 0.3s;
+    }
+
+    nav ul li a:hover { color: white; border-bottom: 2px solid #c31717; }
+    nav ul li a.active { border-bottom: 2px solid #c31717; }
+
+    /* ===================== HERO ===================== */
+    .hero {
+      height: 100vh;
+      background-image: url('https://i.pinimg.com/1200x/4a/c4/7a/4ac47a6b1e2f0782afc8f4e8ea2f5ddb.jpg');
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-color: #000;
+      margin-top: 70px;
+    }
+
+    /* ===================== ABOUT ===================== */
+    .about {
+      max-width: 900px;
+      margin: 80px auto;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .about h2 {
+      font-family: "Playfair Display";
+      margin-bottom: 15px;
+      font-size: 2.3rem;
+      color: #111;
+    }
+
+    .about p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      color: #444;
+      margin-bottom: 14px;
+    }
+
+    /* ===================== ARTICLES ===================== */
+    .articles {
+      max-width: 1150px;
+      margin: 40px auto;
+      padding: 20px;
+    }
+
+    .articles h2 {
+      font-size: 2.1rem;
+      text-align: center;
+      margin-bottom: 18px;
+      font-family: "Playfair Display";
+    }
+
+    /* Tabs */
+    .tabs{
+      display:flex;
+      justify-content:center;
+      gap:12px;
+      margin: 8px 0 25px;
+    }
+
+    .tab-btn{
+      border:none;
+      cursor:pointer;
+      padding:10px 16px;
+      border-radius:999px;
+      background:#ffffff;
+      color:#111;
+      font-weight:600;
+      box-shadow:0 2px 10px rgba(0,0,0,0.08);
+      transition:0.25s;
+      font-family: Inter, sans-serif;
+    }
+
+    .tab-btn.active{
+      background:#0d0d0d;
+      color:#fff;
+      border:1px solid #c31717;
+    }
+
+    .tab-content{ display:none; }
+    .tab-content.active{ display:block; }
+
+    .articles-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 28px;
+    }
+
+    .article-card {
+      background: white;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+      transition: 0.3s;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .article-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+    }
+
+    /* Image in card: show full image inside */
+    .article-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: contain;
+      background-color: #000;
+      display:block;
+    }
+
+    .info { padding: 15px; }
+
+    .info h3 {
+      font-size: 1.08rem;
+      font-family: "Playfair Display";
+      color: #111;
+      line-height: 1.25;
+    }
+
+    .tag{
+      margin-top:10px;
+      display:inline-block;
+      font-size:0.85rem;
+      padding:6px 10px;
+      border-radius:999px;
+      background:#f1f1f1;
+      color:#333;
+    }
+
+    .tag.hard{
+      background:#ffeaea;
+      color:#8b0f0f;
+      font-weight:600;
+    }
+
+    /* ===================== VIDEOS ===================== */
+    .video-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 22px rgba(0,0,0,0.2);
+    }
+
+    /* ===================== FOOTER ===================== */
+    footer {
+      background:#0d0d0d;
+      color:#eee;
+      padding:40px 0;
+      margin-top:60px;
+      border-top:2px solid #c31717;
+      font-family: Inter, sans-serif;
+    }
+
+    footer .container {
+      max-width:1100px;
+      margin:auto;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      text-align:center;
+    }
+
+    footer h2 {
+      font-family:"Playfair Display";
+      font-size:1.9rem;
+      color:white;
+      margin-bottom:10px;
+      letter-spacing:1px;
+    }
+
+    footer p {
+      color:#bbbbbb;
+      max-width:700px;
+      font-size:0.95rem;
+      margin-bottom:25px;
+      line-height:1.6;
+    }
+
+    footer .links a {
+      color:#eee;
+      text-decoration:none;
+      margin:0 12px;
+      font-size:0.95rem;
+    }
+
+    footer .socials a {
+      color:white;
+      font-size:1.3rem;
+      margin:0 10px;
+      text-decoration:none;
+    }
+
+    footer .copy {
+      color:#777;
+      font-size:0.85rem;
+      margin-top:15px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===================== NAV ===================== -->
+  <nav>
+    <div class="logo">THE HOLLYWOOD REPORTER</div>
+    <ul>
+      <li><a href="#home" class="active">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#articles">Articles</a></li>
+      <li><a href="#videos">Videos</a></li>
+    </ul>
+  </nav>
+
+  <!-- ===================== HERO ===================== -->
+  <section id="home" class="hero"></section>
+
+  <!-- ===================== ABOUT ===================== -->
+  <section id="about" class="about">
+    <h2>About Us</h2>
+    <p>
+      <strong>The Hoolywood Reporter</strong> is an independent online magazine dedicated to cinema, television,
+      and the entertainment industry. Our platform explores films and series not only as sources of entertainment,
+      but as powerful cultural and artistic expressions.
+    </p>
+
+    <p>
+      Through in-depth articles, critical analysis, and industry news, we aim to highlight the impact of cinema
+      on society, creativity, and collective imagination. We cover a wide range of topics, from classic films
+      and modern blockbusters to independent cinema, streaming platforms, and emerging technologies such as AI
+      in filmmaking.
+    </p>
+
+    <p>
+      Our editorial approach values thoughtful storytelling, cultural reflection, and diverse perspectives.
+      We believe that cinema is more than images on a screen — it is a language that shapes emotions, memories,
+      and identities across generations.
+    </p>
+
+    <p>
+      <strong>The Hoolywood Reporter</strong> is designed for film lovers, students, professionals, and anyone
+      curious about the stories behind the screen. Our mission is to inform, inspire, and preserve a meaningful
+      dialogue around the art of cinema in all its forms.
+    </p>
+    <p>  
+      <strong>
+              Prepared by:
+              Elaidi Maria,
+              Baghli Lina,
+              Ishak Julie,
+              Marco Céline,
+              ELabdallaoui Malak.
+      </strong>
+    </p>
+  </section>
+
+  <!-- ===================== ARTICLES (WITH 2 OPTIONS) ===================== -->
+  <section id="articles" class="articles">
+    <h2>Articles</h2>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="editorial">Editorial News</button>
+      <button class="tab-btn" data-tab="hard">Hard News</button>
+    </div>
+
+    <!-- EDITORIAL NEWS: 1,4,6,8,10 -->
+    <div class="tab-content active" id="tab-editorial">
+      <div class="articles-grid">
+
+        <a href="article1.html" class="article-card">
+          <img src="https://i.pinimg.com/736x/29/6b/ec/296bec11a8c689b0bf5dcd8d3c8fee61.jpg" alt="Article 1">
+          <div class="info">
+            <h3>Why do we think that female roles in cinema are kind of lame?</h3>
+            <span class="tag">Editorial</span>
+          </div>
+        </a>
+
+        <a href="article4.html" class="article-card">
+          <img src="https://i.pinimg.com/1200x/d6/e5/44/d6e544e37eb6b1d75839381cd29e0ac8.jpg" alt="Article 4">
+          <div class="info">
+            <h3>Movies and Series Have a Real Impact on Their Audience</h3>
+            <span class="tag">Editorial</span>
+          </div>
+        </a>
+
+        <a href="article6.html" class="article-card">
+          <img src="https://images.unsplash.com/photo-1524985069026-dd778a71c7b4" alt="Article 6">
+          <div class="info">
+            <h3>The Rise of Streaming Platforms and the Threat to Cinema</h3>
+            <span class="tag">Editorial</span>
+          </div>
+        </a>
+
+        <a href="article8.html" class="article-card">
+          <img src="https://i.pinimg.com/736x/ad/c7/aa/adc7aa72c4febe12ea3f6b32332cba3e.jpg" alt="Article 8">
+          <div class="info">
+            <h3>Filmmakers Should Save Old Films</h3>
+            <span class="tag">Editorial</span>
+          </div>
+        </a>
+
+        <a href="article10.html" class="article-card">
+          <img src="https://i.pinimg.com/736x/80/38/3a/80383aa205d9bf916d18eac9afe871d9.jpg" alt="Article 10">
+          <div class="info">
+            <h3>The Greatest TV Shows of All Time — And Why They Still Matter</h3>
+            <span class="tag">Editorial</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- HARD NEWS: 2,3,5,7,9 -->
+    <div class="tab-content" id="tab-hard">
+      <div class="articles-grid">
+
+        <a href="article2.html" class="article-card">
+          <img src="https://i.pinimg.com/736x/3b/7b/ef/3b7bef8d3ec368120a187308413175b5.jpg" alt="Article 2">
+          <div class="info">
+            <h3>“Moonlight” Wins Best Motion Picture at the Oscars</h3>
+            <span class="tag hard">Hard News</span>
+          </div>
+        </a>
+
+        <a href="article3.html" class="article-card">
+          <img src="https://i.pinimg.com/736x/89/e7/7b/89e77b9de2f1e3ef759f52606ce70657.jpg" alt="Article 3">
+          <div class="info">
+            <h3>Adèle Exarchopoulos Wins Her Second César This Year</h3>
+            <span class="tag hard">Hard News</span>
+          </div>
+        </a>
+
+        <a href="article5.html" class="article-card">
+          <img src="https://i.pinimg.com/736x/83/65/2e/83652e638cf2c4e21f9446a1ec3470e9.jpg" alt="Article 5">
+          <div class="info">
+            <h3>Hollywood Hires Its First AI Actress: Tilly Norwood</h3>
+            <span class="tag hard">Hard News</span>
+          </div>
+        </a>
+
+        <a href="article7.html" class="article-card">
+          <img src="https://i.pinimg.com/1200x/cc/59/bf/cc59bfa4a9e5631d58f88212fe68cc4c.jpg" alt="Article 7">
+          <div class="info">
+            <h3>Filmmakers and Actors Boycott Israeli Cinema</h3>
+            <span class="tag hard">Hard News</span>
+          </div>
+        </a>
+
+        <a href="article9.html" class="article-card">
+          <img src="https://i.pinimg.com/1200x/7f/00/e1/7f00e194ccc538d645599d0a124a7152.jpg" alt="Article 9">
+          <div class="info">
+            <h3>The Films That Changed Cinema: From Citizen Kane to The Dark Knight</h3>
+            <span class="tag hard">Hard News</span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+
+  </section>
+
+  <!-- ===================== VIDEOS ===================== -->
+  <section id="videos" class="articles">
+    <h2>Featured Videos</h2>
+
+    <div class="videos-grid" style="
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));
+      gap:25px;
+    ">
+      <div class="video-card" style="background:white;border-radius:8px;overflow:hidden;">
+        <iframe width="100%" height="200" src="https://www.youtube.com/embed/EdNi8-evOJo" title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+        <div style="padding:15px;"><h3 style="font-family:'Playfair Display'">Trou Story -Zendaya-</h3></div>
+      </div>
+
+      <div class="video-card" style="background:white;border-radius:8px;overflow:hidden;">
+       <iframe
+  width="100%"
+  height="200"
+  src="https://www.youtube.com/embed/ugcf5aa95SA"
+  title="YouTube video"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen>
+</iframe>
+
+        <div style="padding:15px;"><h3 style="font-family:'Playfair Display'">The art of cinema</h3></div>
+      </div>
+
+      <div class="video-card" style="background:white;border-radius:8px;overflow:hidden;">
+       <iframe
+          width="100%"
+          height="200"
+          src="https://www.youtube.com/embed/O0IHpOPCEAc"
+          title="YouTube Shorts"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen>
+</iframe>
+
+        <div style="padding:15px;"><h3 style="font-family:'Playfair Display'">Two minutes to explain your job</h3></div>
+      </div>
+
+      <div class="video-card" style="background:white;border-radius:8px;overflow:hidden;">
+        <iframe
+  width="100%"
+  height="200"
+  src="https://www.youtube.com/embed/87hQ3gtWvtQ"
+  title="YouTube video"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen>
+</iframe>
+
+        <div style="padding:15px;"><h3 style="font-family:'Playfair Display'">Sidewalk micro : The evolution of cinema</h3></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer>
+    <div class="container">
+      <h2>THE HOOLYWOOD REPORTER</h2>
+      <p>Your daily source for cinema news...</p>
+      <div class="links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#articles">Articles</a>
+        <a href="#videos">Videos</a>
+      </div>
+      <div class="socials">
+        <a href="#">📸</a>
+        <a href="#">🎬</a>
+        <a href="#">▶️</a>
+      </div>
+      <p class="copy">© 2026 The Hoolywood Reporter — All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- Tabs JS -->
+  <script>
+    const tabButtons = document.querySelectorAll(".tab-btn");
+    const tabContents = document.querySelectorAll(".tab-content");
+
+    tabButtons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        tabButtons.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        tabContents.forEach(c => c.classList.remove("active"));
+        const tab = btn.dataset.tab;
+        document.getElementById("tab-" + tab).classList.add("active");
+      });
+    });
+  </script>
+
+</body>
+</html>
